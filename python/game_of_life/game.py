@@ -13,6 +13,14 @@ class Game():
                 next_generation[row_index][column_index] = self.__get_next_state(row_index, column_index)
         return next_generation
 
+    def __get_next_state(self, row_index, column_index):
+        living_neighbors = self.__count_living_neighbors(row_index, column_index)
+
+        if self.__is_alive(row_index, column_index):
+            return 2 <= living_neighbors < 4
+
+        return living_neighbors == 3
+
     def __count_living_neighbors(self, row_index, column_index):
         living_count = 0
         living_count += 1 if self.__is_upper_left_alive(row_index, column_index) else 0
@@ -63,11 +71,3 @@ class Game():
 
     def __create_dead_generation(self):
         return [[False for i in range(self.size)] for i in range(self.size)]
-
-    def __get_next_state(self, row_index, column_index):
-        living_neighbors = self.__count_living_neighbors(row_index, column_index)
-
-        if self.__is_alive(row_index, column_index):
-            return 2 <= living_neighbors < 4
-
-        return living_neighbors == 3
