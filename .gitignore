@@ -1,2 +1,5 @@
 .idea/
 venv/
+Gemfile.lock
+node_modules/
+dist/
